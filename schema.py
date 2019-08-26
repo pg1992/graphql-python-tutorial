@@ -1,29 +1,29 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
-from models import (Department as DepartmentModel, Employee as EmployeeModel)
+from models import Department, Employee
 
 
-class Department(SQLAlchemyObjectType):
+class DepartmentNode(SQLAlchemyObjectType):
     class Meta:
-        model = DepartmentModel
+        model = Department
         interfaces = (relay.Node,)
 
 
 class DepartmentConnection(relay.Connection):
     class Meta:
-        node = Department
+        node = DepartmentNode
 
 
-class Employee(SQLAlchemyObjectType):
+class EmployeeNode(SQLAlchemyObjectType):
     class Meta:
-        model = EmployeeModel
+        model = Employee
         interfaces = (relay.Node,)
 
 
 class EmployeeConnection(relay.Connection):
     class Meta:
-        node = Employee
+        node = EmployeeNode
 
 
 class Query(graphene.ObjectType):
